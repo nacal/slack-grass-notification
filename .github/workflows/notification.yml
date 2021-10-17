@@ -20,7 +20,7 @@ jobs:
             if [ "$COUNT" -eq "0" ]; then
               curl -X POST -H "Content-type: application/json" --data "{\"text\":\"${MESSAGE}\"}" "${WEBHOOK_URL}"
             else
-              curl -X POST -H "Content-type: application/json" --data "Already ${USERNAME} has ${COUNT} contributions today!"
+              curl -X POST -H "Content-type: application/json" --data "{Already ${USERNAME} has ${COUNT} contributions today!}" "${WEBHOOK_URL}"
               exit 0
             fi
           else
