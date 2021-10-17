@@ -2,7 +2,7 @@ name: Notification
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0,10,20,30,40,50 * * * *'
 
 jobs:
   check:
@@ -20,7 +20,7 @@ jobs:
             if [ "$COUNT" -eq "0" ]; then
               curl -X POST -H "Content-type: application/json" --data "{\"text\":\"${MESSAGE}\"}" "${WEBHOOK_URL}"
             else
-              echo "Already ${USERNAME} has ${COUNT} contributions today!"
+              curl -X POST -H "Content-type: application/json" --data "Already ${USERNAME} has ${COUNT} contributions today!"
               exit 0
             fi
           else
