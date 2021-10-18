@@ -1,15 +1,14 @@
-name: Notification
+name: DailyNotification
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 12-14 * * *'
 
 jobs:
   check:
     runs-on: ubuntu-latest
     env:
       USERNAME: ${{ secrets.USERNAME }}
-      MESSAGE: ${{ secrets.MESSAGE }}
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
@@ -18,9 +17,9 @@ jobs:
           if [[ $HTML =~ $PATTERN ]]; then
             COUNT="${BASH_REMATCH[1]}"
             if [ "$COUNT" -eq "0" ]; then
-              curl -X POST -H "Content-type: application/json" --data "{\"text\":\"${MESSAGE}\"}" "${WEBHOOK_URL}"
+              curl -X POST -H "Content-type: application/json" --data "{\"text\":\"今日はまだ草が生えていません\"}" "${WEBHOOK_URL}"
             else
-              curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Already ${USERNAME} has ${COUNT} contributions today!\"}" "${WEBHOOK_URL}"
+              echo "Already ${USERNAME} has ${COUNT} contributions today!"
               exit 0
             fi
           else
