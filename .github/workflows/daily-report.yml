@@ -1,0 +1,24 @@
+name: DailyReport
+
+on:
+  schedule:
+    - cron: '59 14 * * *'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+    steps:
+      - run: |
+          HTML="$(curl -sSL "https://github.com/${USERNAME}")"
+          PATTERN="data-count=\"([0-9]+)\" data-date=\"$(date +"%Y-%m-%d")\""
+          if [[ $HTML =~ $PATTERN ]]; then
+            COUNT="${BASH_REMATCH[1]}"
+            curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Already ${USERNAME} has ${COUNT} contributions today!\"}" "${WEBHOOK_URL}"
+            exit 0
+          else
+            echo "Failed to determine your contributions count from GitHub."
+            exit 1
+          fi
