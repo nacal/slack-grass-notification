@@ -10,9 +10,11 @@ jobs:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
-          script='query ($name: String!, $from: DateTime!, $to: DateTime!) {
-            user(login: $name) {
-              contributionsCollection(from: $from, to: $to) {
+          to="$(date "+%Y-%m-%dT%H:%M:%S")"
+          from="$(date "+%Y-%m-%dT%H:%M:%S" -d '1 day ago')"
+          script='query {
+            user(login: \"nacal\") {
+              contributionsCollection(from: \"'$from'\", to:\"'$to'\") {
                 totalCommitContributions
               }
             }
