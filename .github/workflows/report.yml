@@ -1,0 +1,31 @@
+name: Report
+
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
+      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+    steps:
+      - run: |
+          script='query User { user(login:\"slack-grass-notification\") {
+              name
+              repositories(privacy:PUBLIC,affiliations:OWNER,first:10) {
+                edges {
+                  node {
+                    name
+                    description
+                    createdAt
+                  }
+                }
+              }
+            }
+          }'
+          script="$(echo $script)"
+
+          curl -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H 'Content-Type: application/json' \
+            -X POST -d "{ \"query\": \"$script\"}" https://api.github.com/graphql \
+            | jq .
