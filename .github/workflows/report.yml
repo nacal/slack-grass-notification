@@ -10,7 +10,7 @@ jobs:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
-          script='query User { user(login:\"slack-grass-notification\") {
+          script='query User { user(login:\"nacal\") {
               name
               repositories(privacy:PUBLIC,affiliations:OWNER,first:10) {
                 edges {
