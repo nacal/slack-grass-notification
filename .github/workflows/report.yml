@@ -10,22 +10,23 @@ jobs:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
-          script='query User { user(login:\"nacal\") {
-              name
-              repositories(privacy:PUBLIC,affiliations:OWNER,first:10) {
-                edges {
-                  node {
-                    name
-                    description
-                    createdAt
-                  }
-                }
+          script='query ($name: String!, $from: DateTime!, $to: DateTime!) {
+            user(login: $name) {
+              contributionsCollection(from: $from, to: $to) {
+                totalCommitContributions
               }
             }
           }'
           script="$(echo $script)"
 
+          variables='{
+            "name": "nacal",
+            "from":"2021-10-18T00:00:00",
+            "to":"2021-10-19T00:00:00"
+          }'
+          variables="$(echo $variables)"
+
           curl -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H 'Content-Type: application/json' \
-            -X POST -d "{ \"query\": \"$script\"}" https://api.github.com/graphql \
+            -X POST -d "{ \"query\": \"$script\", \"variables\": \"$variables\" }" https://api.github.com/graphql \
             | jq .
