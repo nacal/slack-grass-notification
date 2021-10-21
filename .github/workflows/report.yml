@@ -21,14 +21,9 @@ jobs:
           }'
           script="$(echo $script)"
 
-          variables='{
-            "name": "nacal",
-            "from":"2021-10-18T00:00:00",
-            "to":"2021-10-19T00:00:00"
-          }'
-          variables="$(echo $variables)"
-
-          curl -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
+          dailyCommitContributions="$(curl -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H 'Content-Type: application/json' \
-            -X POST -d "{ \"query\": \"$script\", \"variables\": \"$variables\" }" https://api.github.com/graphql \
-            | jq .
+            -X POST -d "{ \"query\": \"$script\" }" https://api.github.com/graphql \
+            | jq '.["data"]["user"]["contributionsCollection"]["totalCommitContributions"]')"
+
+          echo $dailyCommitContributions
