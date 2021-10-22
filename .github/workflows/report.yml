@@ -10,8 +10,9 @@ jobs:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
-          to="$(date "+%Y-%m-%dT00:00:00")"
-          from="$(date "+%Y-%m-%dT00:00:00" -d '1 day ago')"
+          to="$(date -u　"+%Y-%m-%dT00:00:00")"
+          from="$(date -u　"+%Y-%m-%dT00:00:00" -d '1 day ago')"
+          echo $to $from
           script='query {
             user(login: \"'${USERNAME}'\") {
               contributionsCollection(from: \"'$from'\", to:\"'$to'\") {
