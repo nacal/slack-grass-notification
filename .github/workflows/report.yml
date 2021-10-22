@@ -13,7 +13,7 @@ jobs:
           to="$(date "+%Y-%m-%dT%H:%M:%S")"
           from="$(date "+%Y-%m-%dT%H:%M:%S" -d '1 day ago')"
           script='query {
-            user(login: \"nacal\") {
+            user(login: \"'${USERNAME}'\") {
               contributionsCollection(from: \"'$from'\", to:\"'$to'\") {
                 totalCommitContributions
               }
