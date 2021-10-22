@@ -12,17 +12,25 @@ jobs:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
     steps:
       - run: |
-          HTML="$(curl -sSL "https://github.com/${USERNAME}")"
-          PATTERN="data-count=\"([0-9]+)\" data-date=\"$(date +"%Y-%m-%d")\""
-          if [[ $HTML =~ $PATTERN ]]; then
-            COUNT="${BASH_REMATCH[1]}"
-            if [ "$COUNT" -eq "0" ]; then
-              curl -X POST -H "Content-type: application/json" --data "{\"text\":\"今日はまだ草が生えていません\"}" "${WEBHOOK_URL}"
-            else
-              echo "Already ${USERNAME} has ${COUNT} contributions today!"
-              exit 0
-            fi
+          to="$(date "+%Y-%m-%dT%H:%M:%S")"
+          from="$(date "+%Y-%m-%dT00:00:00")"
+          script='query {
+            user(login: \"'${USERNAME}'\") {
+              contributionsCollection(from: \"'$from'\", to:\"'$to'\") {
+                totalCommitContributions
+              }
+            }
+          }'
+          script="$(echo $script)"
+
+          dailyCommitContributions="$(curl -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H 'Content-Type: application/json' \
+            -X POST -d "{ \"query\": \"$script\" }" https://api.github.com/graphql \
+            | jq '.["data"]["user"]["contributionsCollection"]["totalCommitContributions"]')"
+
+          if [ "$dailyCommitContributions" -eq "0" ]; then
+            curl -X POST -H "Content-type: application/json" --data "{\"text\":\"今日はまだ草が生えていません\"}" "${WEBHOOK_URL}"
           else
-            echo "Failed to determine your contributions count from GitHub."
-            exit 1
+            echo "Already ${USERNAME} has $dailyCommitContributions contributions today!"
+            exit 0
           fi
