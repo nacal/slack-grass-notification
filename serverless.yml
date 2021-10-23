@@ -5,7 +5,7 @@ provider:
   timeout: 120
 
   environment:
-    SLACK_WEBHOOK: ${env:WEBHOOK}
+    SLACK_WEBHOOK: ${env:WEBHOOK_URL}
 
 package:
   exclude:
