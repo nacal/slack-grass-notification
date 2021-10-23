@@ -42,4 +42,5 @@ jobs:
         with:
           type: ${{ job.status }}
           job_name: '*Deploy Lambda*'
-          url: ${{ secrets.WEBHOOK }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.WEBHOOK }}

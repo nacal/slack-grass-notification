@@ -2,12 +2,12 @@ const { IncomingWebhook } = require('@slack/webhook');
 
 exports.post = async (event) => {
   try {
-    const url = process.env.SLACK_WEBHOOK || '';
+    const url = process.env.WEBHOOK || '';
 
     if (url === '') {
       throw new Error(`
-        Error: Missing SLACK_WEBHOOK
-        Please set SLACK_WEBHOOK as environment variable
+        Error: Missing WEBHOOK
+        Please set WEBHOOK as environment variable
       `);
     }
 
