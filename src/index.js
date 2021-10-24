@@ -1,6 +1,6 @@
 const { IncomingWebhook } = require('@slack/webhook');
 
-exports.post = async () => {
+exports.post = async (event) => {
   try {
     const url = process.env.SLACK_WEBHOOK || '';
 
