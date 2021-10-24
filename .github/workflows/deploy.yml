@@ -36,11 +36,11 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
 
-      - name: Notify result to slack
-        uses: homoluctus/slatify@master
-        if: always()
-        with:
-          type: ${{ job.status }}
-          job_name: '*Deploy Lambda*'
-        env:
-          SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
+      # - name: Notify result to slack
+      #   uses: homoluctus/slatify@master
+      #   if: always()
+      #   with:
+      #     type: ${{ job.status }}
+      #     job_name: '*Deploy Lambda*'
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
