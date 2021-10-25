@@ -9,6 +9,6 @@ provider:
 
 functions:
   slack:
-    handler: src/index.ts
+    handler: src/index.post
     description: "Post message to Slack"
     timeout: 60
