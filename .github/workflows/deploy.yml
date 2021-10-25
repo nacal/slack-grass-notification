@@ -1,13 +1,13 @@
 on:
   push:
     branches:
-      - main
+      - remove
 
-name: Auto Deploy to AWS Lambda
+name: Remove Lambda
 
 jobs:
-  deploy:
-    name: Auto Deploy
+  remove:
+    name: Remove Lambda
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
@@ -17,20 +17,11 @@ jobs:
         with:
           node-version: '10.x'
 
-      - name: Install Dependencies
-        run: |
-          npm install serverless -g
-          npm install
+      - name: Install Serverless Framework
+        run: npm install serverless -g
 
-      - name: Deploy to Lambda
-        run: sls deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
-
-      - name: Execute Lambda
-        run: sls invoke -f slack
+      - name: Remove Lambda
+        run: sls remove -v
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -41,6 +32,6 @@ jobs:
         if: always()
         with:
           type: ${{ job.status }}
-          job_name: '*Deploy Lambda*'
+          job_name: '*Remove Lambda*'
         env:
           SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
