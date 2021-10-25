@@ -7,11 +7,6 @@ provider:
   environment:
     SLACK_WEBHOOK: ${env:SLACK_WEBHOOK}
 
-package:
-  exclude:
-    - Dockerfile
-    - docker-compose.yml
-
 functions:
   slack:
     handler: src/index.post
