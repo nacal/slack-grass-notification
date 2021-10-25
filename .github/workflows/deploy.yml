@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - remove
+      - main
 
 name: Remove Lambda
 
