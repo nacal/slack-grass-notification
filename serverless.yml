@@ -9,6 +9,6 @@ provider:
 
 functions:
   slack:
-    handler: src/index.post
+    handler: auto-deploy-lambda-dev-slack/src/index.post
     description: "Post message to Slack"
     timeout: 60
