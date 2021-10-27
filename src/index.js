@@ -1,5 +1,5 @@
 const { IncomingWebhook } = require('@slack/webhook');
-const { getDailyCommitContributions } = require('./main.js')
+const { commits } = require('./main.js')
 
 exports.post = async (event) => {
   try {
@@ -11,8 +11,8 @@ exports.post = async (event) => {
         Please set SLACK_WEBHOOK as environment variable
       `);
     }
-
-    const commit = await getDailyCommitContributions();
+    console.log(`commit:${commits}`)
+    const commit = await commits;
 
     const webhook = new IncomingWebhook(url);
     const msg = {
