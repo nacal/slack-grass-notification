@@ -1,5 +1,5 @@
 const { IncomingWebhook } = require('@slack/webhook');
-const { getDailyCommitContributions} = require('./main.js')
+const { getDailyCommitContributions } = require('./main.js')
 
 exports.post = async (event) => {
   try {
@@ -12,7 +12,7 @@ exports.post = async (event) => {
       `);
     }
 
-    const test = getDailyCommitContributions;
+    const test = getDailyCommitContributions();
 
     const webhook = new IncomingWebhook(url);
     const msg = {
