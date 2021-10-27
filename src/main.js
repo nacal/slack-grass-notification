@@ -9,14 +9,11 @@ const QUERY = `
     }
   }`;
 
-const getDailyCommitContributions = async() => {
+exports.getDailyCommitContributions = async() => {
   try {
     const res = await graphqlWithAuth(QUERY);
-    console.log(res.user.contributionsCollection.totalCommitContributions)
     return res.user.contributionsCollection.totalCommitContributions;
   } catch (err) {
     console.error(err.message);
   }
 }
-
-exports.commits = getDailyCommitContributions;
