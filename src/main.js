@@ -1,4 +1,4 @@
-const { graphql } = require('./graphql.js');
+const { graphqlWithAuth } = require('./graphql.js');
 
 const QUERY = `
   {
@@ -9,7 +9,7 @@ const QUERY = `
     }
   }`;
 
-const getDailyCommitContributions = async() => {
+exports.getDailyCommitContributions = async() => {
   try {
     const res = await graphql(QUERY);
     return res;
@@ -17,5 +17,3 @@ const getDailyCommitContributions = async() => {
     console.error(err.message);
   }
 }
-
-export default getDailyCommitContributions;
