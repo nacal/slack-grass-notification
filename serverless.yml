@@ -6,6 +6,7 @@ provider:
 
   environment:
     SLACK_WEBHOOK: ${env:SLACK_WEBHOOK}
+    GITHUB_TOKEN: ${env:GITHUB_TOKEN}
 
 functions:
   slack:

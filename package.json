@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "author": "nacal",
   "license": "MIT",
   "dependencies": {
+    "@octokit/graphql": "^4.8.0",
     "@slack/webhook": "^5.0.1"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 const { IncomingWebhook } = require('@slack/webhook');
+import getDailyCommitContributions from './main.js'
 
 exports.post = async (event) => {
   try {
@@ -13,7 +14,7 @@ exports.post = async (event) => {
 
     const webhook = new IncomingWebhook(url);
     const msg = {
-      text: 'Auto Deploy to Lambda with GitHub Actions'
+      text: getDailyCommitContributions
     };
     const res = await webhook.send(msg);
     console.log(res);
