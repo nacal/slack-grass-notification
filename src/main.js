@@ -12,7 +12,7 @@ const QUERY = `
 exports.getDailyCommitContributions = async() => {
   try {
     const res = await graphqlWithAuth(QUERY);
-    return res;
+    return res.user.contributionsCollection.totalCommitContributions;
   } catch (err) {
     console.error(err.message);
   }

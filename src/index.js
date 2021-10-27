@@ -12,11 +12,11 @@ exports.post = async (event) => {
       `);
     }
 
-    const test = getDailyCommitContributions();
+    const commit = getDailyCommitContributions();
 
     const webhook = new IncomingWebhook(url);
     const msg = {
-      text: `test:${test}`
+      text: `commit:${commit}`
     };
     const res = await webhook.send(msg);
     console.log(res);
