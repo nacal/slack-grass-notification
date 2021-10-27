@@ -1,9 +1,9 @@
-const { graphql } = require('@octokit/graphql');
+// const { graphql } = require('@octokit/graphql');
 
-const token = process.env.GITHUB_TOKEN || '';
+// const token = process.env.GITHUB_TOKEN || '';
 
-exports.graphqlWithAuth = graphql.defaults({
-  headers: {
-    authorization: `token ${token}`,
-  },
-});
+// exports.graphqlWithAuth = graphql.defaults({
+//   headers: {
+//     authorization: `token ${token}`,
+//   },
+// });
