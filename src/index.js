@@ -12,7 +12,7 @@ exports.post = async (event) => {
       `);
     }
 
-    const test = 1;
+    const test = getDailyCommitContributions;
 
     const webhook = new IncomingWebhook(url);
     const msg = {
