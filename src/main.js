@@ -1,4 +1,4 @@
-import { graphql } from './graphql.js';
+const { graphql } = require('./graphql.js');
 
 const QUERY = `
   {

@@ -1,4 +1,4 @@
-import { graphql } from '@octokit/graphql';
+const { graphql } = require('@octokit/graphql');
 
 const token = process.env.GITHUB_TOKEN || '';
 
