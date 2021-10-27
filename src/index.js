@@ -11,8 +11,8 @@ exports.post = async (event) => {
         Please set SLACK_WEBHOOK as environment variable
       `);
     }
-    console.log(`commit:${commits}`)
-    const commit = await commits;
+    console.log(`commit:${commits()}`)
+    const commit = await commits();
 
     const webhook = new IncomingWebhook(url);
     const msg = {
