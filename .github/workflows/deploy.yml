@@ -29,6 +29,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SLACK_WEBHOOK: ${{ secrets.WEBHOOK_URL }}
           GITHUB_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+          USERNAME: ${{secrets.USERNAME}}
 
       - name: Notify result to slack
         uses: homoluctus/slatify@master
