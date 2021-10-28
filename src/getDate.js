@@ -9,8 +9,8 @@ exports.getDate = () => {
         monthFrom   = date.getMonth()+ 1,
         dayFrom    = date.getDate();
 
-  from = `${yearFrom}-${monthFrom}-${dayFrom}T00:00:00`;
-  to = `${yearTo}-${monthTo}-${dayTo}T00:00:00`;
+  from = `${yearFrom}-${monthFrom}-${dayFrom}T15:00:00`;
+  to = `${yearTo}-${monthTo}-${dayTo}T15:00:00`;
 
   return {from: from, to: to}
 }
