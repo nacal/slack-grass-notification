@@ -1,9 +1,10 @@
 const { graphqlWithAuth } = require('./graphql.js');
+const { getDate } = require('./getDate.js');
 
 const QUERY = `
-  query($user: String!) {
+  query($user: String!, $from: String!, $to: String!) {
     user(login: $user) {
-      contributionsCollection(from: "2021-10-25T00:00:00", to: "2021-10-26T00:00:00") {
+      contributionsCollection(from: $from, to: $to) {
         totalCommitContributions
       }
     }
@@ -11,7 +12,7 @@ const QUERY = `
 
 exports.getDailyCommit = async() => {
   try {
-    const res = await graphqlWithAuth(QUERY, {user: `${process.env.USERNAME}`});
+    const res = await graphqlWithAuth(QUERY, {user: `${process.env.USERNAME}`, from: getDate().from, to: getDate().to});
     return res.user.contributionsCollection.totalCommitContributions;
   } catch (err) {
     console.error(err.message);
