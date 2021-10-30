@@ -15,7 +15,7 @@ exports.post = async (event) => {
     const commit = await getDailyCommit();
     const webhook = new IncomingWebhook(url);
     const msg = {
-      text: `commit:${commit}`
+      text: `今日のコミットは${commit}件でした`
     };
     const res = await webhook.send(msg);
     console.log(res);
