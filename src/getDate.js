@@ -9,5 +9,7 @@ exports.getDate = () => {
         from = `${formatDate}T00:00:00`,
         to = `${formatDate}T23:59:59`;
 
+  console.log(from, to)
+
   return {from: from, to: to}
 }
