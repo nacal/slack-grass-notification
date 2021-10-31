@@ -1,6 +1,5 @@
 exports.getDate = () => {
   const date = new Date();
-  date.setDate(date.getDate() - 1);
 
   const year    = date.getFullYear(),
         month   = date.getMonth()+ 1,
@@ -8,8 +7,6 @@ exports.getDate = () => {
         formatDate = `${year}-${month}-${day}`,
         from = `${formatDate}T00:00:00`,
         to = `${formatDate}T23:59:59`;
-
-  console.log(from, to)
 
   return {from: from, to: to}
 }
