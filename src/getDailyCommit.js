@@ -12,9 +12,11 @@ const QUERY = `
     }
   }`;
 
+const date = getDate();
+
 exports.getDailyCommit = async() => {
   try {
-    const res = await graphqlWithAuth(QUERY, {user: `${process.env.USERNAME}`, from: getDate().from, to: getDate().to});
+    const res = await graphqlWithAuth(QUERY, {user: `${process.env.USERNAME}`, from: date.from, to: date.to});
     return res.user.contributionsCollection.contributionCalendar.totalContributions;
   } catch (err) {
     console.error(err.message);
