@@ -19,12 +19,10 @@ exports.post = async (event) => {
     text = `今日のコミットは${commit}件でした` :
     commit === 0 ?
       text = `今日はまだ草が生えていません` :
-      text = 'false'
-
-  console.log(text)
+      ''
 
   const msg = { text: text };
-  const res = await webhook.send(msg);
+  text !== undefined ? res = await webhook.send(msg) : ''
   console.log(res);
 
   return;
