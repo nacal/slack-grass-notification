@@ -17,7 +17,8 @@ const date = getDate();
 exports.getDailyCommit = async() => {
   try {
     const res = await graphqlWithAuth(QUERY, {user: `${process.env.USERNAME}`, from: date.from, to: date.to});
-    return res.user.contributionsCollection.contributionCalendar.totalContributions;
+    dailiCommit = res.user.contributionsCollection.contributionCalendar.totalContributions;
+    return {dailiCommit: dailiCommit, isReportTime: isReportTime}
   } catch (err) {
     console.error(err.message);
   }
