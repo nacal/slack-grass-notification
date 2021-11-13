@@ -22,7 +22,7 @@ exports.post = async (event) => {
       text = null
 
   const msg = { text: text };
-  text !== null ? res = await webhook.send(msg) : ''
+  text !== null ? res = await webhook.send(msg) : res = 'You had been commit today.'
   console.log(res);
 
   return;
