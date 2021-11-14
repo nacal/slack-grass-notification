@@ -9,7 +9,7 @@ exports.getDate = () => {
         from = `${formatDate}T00:00:00`,
         to = `${formatDate}T23:59:59`;
 
-  (hours === 16) ?  isReportTime = true : isReportTime = false
+  (hours === 15) ?  isReportTime = true : isReportTime = false
 
   return {from: from, to: to, isReportTime: isReportTime}
 }
