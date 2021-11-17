@@ -1,4 +1,4 @@
-const { graphqlWithAuth } = require('./graphql.js');
+const { graphqlWithAuth } = require('./graphqlWithAuth.js');
 const { getDate } = require('./getDate.js');
 
 const QUERY = `
